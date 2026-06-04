@@ -1,0 +1,27 @@
+{
+  "name": "grupo-cvrbg-portal",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3011",
+    "build": "next build",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "framer-motion": "^12.23.24",
+    "next": "^15.5.6",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.17",
+    "eslint": "^9.39.1",
+    "eslint-config-next": "^15.5.6",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.7.2"
+  }
+}
