@@ -33,7 +33,7 @@ export const metrics = [
   { value: "+20", label: "anos de experiência" },
   { value: "300+", label: "colaboradores" },
   { value: "65+", label: "veículos na frota" },
-  { value: "2.750", label: "animais/dia de capacidade" },
+  { value: "+600k", label: "animais/dia de capacidade" },
 ] as const;
 
 export type SolutionIcon = "van" | "ambulance" | "clinic" | "rescue";
@@ -63,7 +63,7 @@ export const solutions = [
   {
     id: "resgate-manejo",
     icon: "rescue" as SolutionIcon,
-    title: "Resgate e manejo",
+    title: "Resgate, manejo e alojamento",
     text: "Equipes preparadas para manejo, remoção e atendimento de animais em situações que exigem condução técnica.",
     outcome: "Condução técnica de ocorrências",
   },

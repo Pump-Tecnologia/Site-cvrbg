@@ -9,7 +9,7 @@ const demandTypes = [
   "Castramóveis e mutirões",
   "SAMU Animal",
   "UBS Animal",
-  "Resgate e manejo",
+  "Resgate, manejo e alojamento",
   "Operação integrada",
   "Outro",
 ] as const;
