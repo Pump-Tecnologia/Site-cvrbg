@@ -106,6 +106,13 @@ export function Footer() {
             os direitos reservados.
           </p>
           <p>
+            <Link
+              href="/privacidade"
+              className="font-medium text-white/65 transition hover:text-brand-orange"
+            >
+              Política de Privacidade
+            </Link>
+            {" · "}
             Desenvolvido por{" "}
             <a
               href="https://pumpsites.com.br"
