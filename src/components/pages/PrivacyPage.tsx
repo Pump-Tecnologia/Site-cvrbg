@@ -12,7 +12,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 
 const ATUALIZADO_EM = "15 de agosto de 2026";
 const VERSAO = "1.0";
-const EMAIL_DPO = "privacidade@grupocvrbg.com.br";
+const EMAIL_DPO = "devcvrbg@gmail.com";
 const RAZAO_SOCIAL = "Clínica Veterinária Ricardo LTDA";
 const CNPJ = "06.276.996/0001-49";
 
