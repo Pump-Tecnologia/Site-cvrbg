@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { contactEmailHref } from "@/data/site";
 
 export function HeroSection() {
   return (
@@ -42,7 +43,7 @@ export function HeroSection() {
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button
-              href="/contato"
+              href={contactEmailHref}
               variant="primary"
               size="lg"
               withArrow

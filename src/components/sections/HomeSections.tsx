@@ -12,7 +12,13 @@ import {
   IconRescue,
   IconArrow,
 } from "@/components/ui/icons";
-import { metrics, presenceItems, solutions, type SolutionIcon } from "@/data/site";
+import {
+  metrics,
+  presenceItems,
+  solutions,
+  type SolutionIcon,
+  contactEmailHref,
+} from "@/data/site";
 import type { LucideIcon } from "lucide-react";
 
 const solutionIcons: Record<SolutionIcon, LucideIcon> = {
@@ -151,7 +157,10 @@ export function SolutionsSection() {
 /* ----------------------------------------------------------------- */
 export function AboutSection() {
   return (
-    <section id="sobre" className="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28">
+    <section
+      id="sobre"
+      className="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28"
+    >
       <PawField className="text-[#a88f8b]/30" />
       <Container className="relative">
         <div className="grid gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:items-stretch lg:gap-20">
@@ -258,15 +267,17 @@ export function PresenceSection() {
                     className="absolute -top-[7px] left-0 size-3 rounded-full border-2 border-brand-orange bg-brand-brown"
                     aria-hidden="true"
                   />
-                  <p className="font-sans text-lg font-medium text-white">{item}</p>
+                  <p className="font-sans text-lg font-medium text-white">
+                    {item}
+                  </p>
                 </li>
               ))}
             </ul>
 
             <div className="mt-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
               <p className="max-w-lg font-sans text-sm font-light leading-6 text-white/70">
-                Experiência em operações públicas com capacidade de mobilização em
-                diferentes regiões do país.
+                Experiência em operações públicas com capacidade de mobilização
+                em diferentes regiões do país.
               </p>
               <Button href="/sobre" variant="primary" withArrow>
                 Nossa trajetória
@@ -284,7 +295,10 @@ export function PresenceSection() {
 /* ----------------------------------------------------------------- */
 export function FinalCtaSection() {
   return (
-    <section id="contato" className="bg-grain relative overflow-hidden bg-brand-orange py-20 text-white sm:py-24">
+    <section
+      id="contato"
+      className="bg-grain relative overflow-hidden bg-brand-orange py-20 text-white sm:py-24"
+    >
       <PawField className="text-white/[0.13]" />
       <div className="pointer-events-none absolute -right-16 -top-16 h-72 w-72 rounded-full bg-white/10 blur-2xl" />
       <Container className="relative">
@@ -298,7 +312,12 @@ export function FinalCtaSection() {
               em escala.
             </h2>
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button href="/contato" variant="secondary" size="lg" withArrow>
+              <Button
+                href={contactEmailHref}
+                variant="secondary"
+                size="lg"
+                withArrow
+              >
                 Falar com o Grupo
               </Button>
               <Button href="/solucoes" variant="inverse" size="lg">

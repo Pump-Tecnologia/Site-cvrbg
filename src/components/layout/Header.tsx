@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { navigationItems } from "@/data/navigation";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { contactEmailHref } from "@/data/site";
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -34,7 +35,9 @@ export function Header() {
   return (
     <motion.header
       animate={{
-        backgroundColor: isScrolled ? "rgba(255,255,255,0.94)" : "rgba(255,255,255,0)",
+        backgroundColor: isScrolled
+          ? "rgba(255,255,255,0.94)"
+          : "rgba(255,255,255,0)",
         boxShadow: isScrolled
           ? "0 14px 40px rgba(45,22,18,0.1)"
           : "0 0 0 rgba(45,22,18,0)",
@@ -59,7 +62,9 @@ export function Header() {
           >
             <span
               className={`relative overflow-hidden transition-[height,width] duration-300 ${
-                isScrolled ? "h-11 w-40 lg:h-12 lg:w-44" : "h-12 w-44 lg:h-14 lg:w-52"
+                isScrolled
+                  ? "h-11 w-40 lg:h-12 lg:w-44"
+                  : "h-12 w-44 lg:h-14 lg:w-52"
               }`}
             >
               <Image
@@ -95,7 +100,12 @@ export function Header() {
                 </Link>
               );
             })}
-            <Button href="/contato" variant="primary" size="sm" withArrow>
+            <Button
+              href={contactEmailHref}
+              variant="primary"
+              size="sm"
+              withArrow
+            >
               Falar com o Grupo
             </Button>
           </div>
@@ -162,7 +172,12 @@ export function Header() {
                 })}
               </div>
               <div className="mt-3">
-                <Button href="/contato" variant="primary" withArrow fullWidth>
+                <Button
+                  href={contactEmailHref}
+                  variant="primary"
+                  withArrow
+                  fullWidth
+                >
                   Falar com o Grupo
                 </Button>
               </div>

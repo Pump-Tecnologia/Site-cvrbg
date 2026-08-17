@@ -21,6 +21,7 @@ import {
   partnerItems,
   operatingHighlights,
   type ValueIcon,
+  contactEmailHref,
 } from "@/data/site";
 import type { LucideIcon } from "lucide-react";
 
@@ -74,9 +75,10 @@ export function AboutPage() {
                 <span className="text-brand-orange">.</span>
               </h1>
               <p className="mt-6 max-w-2xl font-sans text-lg font-light leading-8 text-brand-muted">
-                Há mais de 20 anos, o Grupo CVRBG transforma conhecimento técnico
-                em operações capazes de aproximar o cuidado animal da população —
-                com estrutura própria, equipe especializada e visão de longo prazo.
+                Há mais de 20 anos, o Grupo CVRBG transforma conhecimento
+                técnico em operações capazes de aproximar o cuidado animal da
+                população — com estrutura própria, equipe especializada e visão
+                de longo prazo.
               </p>
             </div>
           </Reveal>
@@ -221,7 +223,10 @@ export function AboutPage() {
       </section>
 
       {/* Estrutura operacional */}
-      <section id="estrutura" className="bg-brand-brown py-20 text-white sm:py-24 lg:py-28">
+      <section
+        id="estrutura"
+        className="bg-brand-brown py-20 text-white sm:py-24 lg:py-28"
+      >
         <Container>
           <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch lg:gap-16">
             <Reveal className="lg:h-full">
@@ -304,7 +309,10 @@ export function AboutPage() {
                       key={item}
                       className="flex items-center gap-3 border-b border-brand-brown/8 pb-3 font-sans text-[15px] font-light text-brand-brown"
                     >
-                      <span className="size-1.5 shrink-0 rounded-full bg-brand-orange" aria-hidden="true" />
+                      <span
+                        className="size-1.5 shrink-0 rounded-full bg-brand-orange"
+                        aria-hidden="true"
+                      />
                       {item}
                     </li>
                   ))}
@@ -333,7 +341,10 @@ export function AboutPage() {
                 preload="metadata"
                 poster="/images/video-posters/institucional-cvrbg.jpg"
               >
-                <source src="/videos/institucional-cvrbg.mp4" type="video/mp4" />
+                <source
+                  src="/videos/institucional-cvrbg.mp4"
+                  type="video/mp4"
+                />
                 Seu navegador não oferece suporte à reprodução de vídeo.
               </video>
             </div>
@@ -376,9 +387,10 @@ export function AboutPage() {
                       <span className="text-brand-orange">.</span>
                     </h3>
                     <p className="mt-4 max-w-xl font-sans text-[15px] font-light leading-7 text-white/74">
-                      A origem do Grupo nasce da prática veterinária e evolui para uma
-                      operação capaz de atender animais, famílias e administrações
-                      públicas com método, equipe e responsabilidade técnica.
+                      A origem do Grupo nasce da prática veterinária e evolui
+                      para uma operação capaz de atender animais, famílias e
+                      administrações públicas com método, equipe e
+                      responsabilidade técnica.
                     </p>
                   </div>
 
@@ -409,9 +421,9 @@ export function AboutPage() {
                     <span className="text-brand-orange">.</span>
                   </h3>
                   <p className="mt-4 font-sans text-[15px] font-light leading-7 text-brand-muted">
-                    Empresa criada em 2015 e integrada à trajetória do Grupo CVRBG. O
-                    conteúdo institucional detalhado será incorporado assim que o
-                    material oficial for disponibilizado.
+                    Empresa criada em 2015 e integrada à trajetória do Grupo
+                    CVRBG. O conteúdo institucional detalhado será incorporado
+                    assim que o material oficial for disponibilizado.
                   </p>
                 </div>
                 <div className="mt-10 border-t border-brand-brown/10 pt-6">
@@ -429,7 +441,7 @@ export function AboutPage() {
       <ClosingCta
         text="Conheça as soluções que transformam essa experiência em operações para a gestão pública."
         primaryLabel="Falar com o Grupo"
-        primaryHref="/contato"
+        primaryHref={contactEmailHref}
         secondaryLabel="Ver soluções"
         secondaryHref="/solucoes"
       />

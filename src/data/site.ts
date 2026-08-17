@@ -32,6 +32,11 @@ export function emailLink(subject?: string, body?: string): string {
   return query ? `mailto:${company.email}?${query}` : `mailto:${company.email}`;
 }
 
+/** Default "Falar com o Grupo" destination — used by every CTA on the site. */
+export const contactEmailHref = emailLink(
+  "Contato institucional — saúde pública animal",
+);
+
 export const metrics = [
   { value: "+20", label: "anos de experiência" },
   { value: "300+", label: "colaboradores" },

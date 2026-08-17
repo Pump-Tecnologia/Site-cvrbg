@@ -15,7 +15,7 @@ import {
   IconTeam,
   IconPhone,
 } from "@/components/ui/icons";
-import { solutions, type SolutionIcon } from "@/data/site";
+import { solutions, type SolutionIcon, contactEmailHref } from "@/data/site";
 import type { LucideIcon } from "lucide-react";
 
 const solutionIcons: Record<SolutionIcon, LucideIcon> = {
@@ -26,7 +26,11 @@ const solutionIcons: Record<SolutionIcon, LucideIcon> = {
 };
 
 // Solutions that have a dedicated detail section below the overview grid.
-const detailIds = new Set<string>(["castramoveis", "samu-animal", "ubs-animal"]);
+const detailIds = new Set<string>([
+  "castramoveis",
+  "samu-animal",
+  "ubs-animal",
+]);
 
 const managementItems = [
   {
@@ -166,7 +170,10 @@ export function SolutionsPage() {
       </section>
 
       {/* Castramóveis — video */}
-      <section id="castramoveis" className="bg-brand-brown py-20 text-white sm:py-24 lg:py-28">
+      <section
+        id="castramoveis"
+        className="bg-brand-brown py-20 text-white sm:py-24 lg:py-28"
+      >
         <Container>
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16">
             <Reveal>
@@ -202,7 +209,10 @@ export function SolutionsPage() {
       </section>
 
       {/* SAMU Animal — icon-led */}
-      <section id="samu-animal" className="bg-brand-cream py-20 sm:py-24 lg:py-28">
+      <section
+        id="samu-animal"
+        className="bg-brand-cream py-20 sm:py-24 lg:py-28"
+      >
         <Container>
           <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
             <Reveal>
@@ -303,7 +313,9 @@ export function SolutionsPage() {
                     key={item.title}
                     className="rounded-[var(--radius-lg)] border border-brand-brown/10 bg-white p-6 text-brand-brown shadow-[var(--shadow-sm)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-brown/25 hover:shadow-[var(--shadow-lg)] sm:p-7"
                   >
-                    <h3 className="font-display text-lg font-semibold">{item.title}</h3>
+                    <h3 className="font-display text-lg font-semibold">
+                      {item.title}
+                    </h3>
                     <p className="mt-2 font-sans text-sm font-light leading-6 text-brand-muted">
                       {item.text}
                     </p>
@@ -318,7 +330,7 @@ export function SolutionsPage() {
       <ClosingCta
         text="Estruture uma operação de saúde animal com equipe, frota e processos preparados para o setor público."
         primaryLabel="Falar com o Grupo"
-        primaryHref="/contato"
+        primaryHref={contactEmailHref}
         secondaryLabel="Conhecer o Grupo"
         secondaryHref="/sobre"
       />

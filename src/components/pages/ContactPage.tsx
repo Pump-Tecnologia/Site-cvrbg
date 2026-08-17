@@ -4,7 +4,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { IconPhone, IconMap, IconCheck } from "@/components/ui/icons";
 import { ContactForm } from "@/components/pages/ContactForm";
-import { company, emailLink } from "@/data/site";
+import { company, contactEmailHref } from "@/data/site";
 
 const includePoints = [
   "Identificação do órgão público, cidade e estado.",
@@ -26,7 +26,7 @@ const channels: Channel[] = [
     icon: <FaEnvelope size={19} />,
     label: "E-mail",
     value: company.email,
-    href: emailLink("Contato institucional — saúde pública animal"),
+    href: contactEmailHref,
   },
   {
     icon: <FaWhatsapp size={20} />,
@@ -93,8 +93,9 @@ export function ContactPage() {
               <span className="text-brand-orange">.</span>
             </h1>
             <p className="mt-6 max-w-2xl font-sans text-lg font-light leading-8 text-brand-muted">
-              Canal institucional para prefeituras, secretarias, governos e órgãos
-              interessados em estruturar programas de saúde pública animal.
+              Canal institucional para prefeituras, secretarias, governos e
+              órgãos interessados em estruturar programas de saúde pública
+              animal.
             </p>
           </div>
         </Reveal>
