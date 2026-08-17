@@ -85,7 +85,7 @@ export function SolutionsPage() {
                   execução assistida.
                 </p>
                 <div className="mt-8">
-                  <Button href="/contato" variant="primary" size="lg" withArrow>
+                  <Button href={contactEmailHref} variant="primary" size="lg" withArrow>
                     Solicitar uma proposta
                   </Button>
                 </div>
