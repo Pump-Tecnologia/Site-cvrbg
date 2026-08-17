@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
 import { IconChevron } from "@/components/ui/icons";
-import { whatsappLink } from "@/data/site";
+import { emailLink } from "@/data/site";
 
 const demandTypes = [
   "Castramóveis e mutirões",
@@ -64,7 +64,10 @@ export function ContactForm() {
       .filter(Boolean)
       .join("\n");
 
-    window.open(whatsappLink(message), "_blank", "noreferrer");
+    window.location.href = emailLink(
+      `Demanda: ${form.demand} — ${form.org.trim()}`,
+      message,
+    );
   }
 
   const showError = touched && !requiredFilled;
@@ -79,8 +82,8 @@ export function ContactForm() {
         Envie sua demanda
       </p>
       <p className="mt-2 font-sans text-sm font-light leading-6 text-brand-muted">
-        Preencha os campos e continue a conversa pelo WhatsApp — sua mensagem já
-        chega organizada para a nossa equipe.
+        Preencha os campos e envie por e-mail — sua mensagem já chega
+        organizada para a nossa equipe.
       </p>
 
       <div className="mt-7 grid gap-5">
@@ -187,10 +190,10 @@ export function ContactForm() {
 
       <div className="mt-6">
         <Button type="submit" variant="primary" size="lg" withArrow fullWidth>
-          Enviar pelo WhatsApp
+          Enviar por e-mail
         </Button>
         <p className="mt-3 text-center font-sans text-xs font-light text-brand-muted">
-          Você será direcionado ao WhatsApp com a mensagem pronta.
+          Seu aplicativo de e-mail será aberto com a mensagem pronta.
         </p>
       </div>
     </form>

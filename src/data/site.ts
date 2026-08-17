@@ -11,10 +11,10 @@ export const brand = {
 export const company = {
   name: "Grupo CVRBG",
   foundedYear: 2005,
-  whatsappNumber: "5511971291789",
   phoneDisplay: "(11) 4718-1789",
   phoneHref: "+551147181789",
   whatsappDisplay: "(11) 97129-1789",
+  email: "comercial@cvrbg.com.br",
   instagram: "@cvetricardo",
   instagramUrl: "https://instagram.com/cvetricardo",
   address: {
@@ -23,17 +23,20 @@ export const company = {
   },
 } as const;
 
-/** Pre-fills a WhatsApp conversation with the institutional team. */
-export function whatsappLink(message?: string): string {
-  const base = `https://wa.me/${company.whatsappNumber}`;
-  return message ? `${base}?text=${encodeURIComponent(message)}` : base;
+/** Pre-fills an e-mail to the commercial team. */
+export function emailLink(subject?: string, body?: string): string {
+  const params = new URLSearchParams();
+  if (subject) params.set("subject", subject);
+  if (body) params.set("body", body);
+  const query = params.toString().replace(/\+/g, "%20");
+  return query ? `mailto:${company.email}?${query}` : `mailto:${company.email}`;
 }
 
 export const metrics = [
   { value: "+20", label: "anos de experiência" },
   { value: "300+", label: "colaboradores" },
   { value: "65+", label: "veículos na frota" },
-  { value: "+600k", label: "animais/dia de capacidade" },
+  { value: "+600k", label: "animais castrados" },
 ] as const;
 
 export type SolutionIcon = "van" | "ambulance" | "clinic" | "rescue";

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { navigationItems } from "@/data/navigation";
-import { company, solutions, whatsappLink } from "@/data/site";
+import { company, solutions, emailLink } from "@/data/site";
 
 export function Footer() {
   return (
@@ -75,13 +75,12 @@ export function Footer() {
                 {company.address.line2}
               </p>
               <a
-                href={whatsappLink()}
-                target="_blank"
-                rel="noreferrer"
+                href={emailLink()}
                 className="transition hover:text-brand-orange"
               >
-                WhatsApp {company.whatsappDisplay}
+                {company.email}
               </a>
+              <p>WhatsApp {company.whatsappDisplay}</p>
               <a
                 href={`tel:${company.phoneHref}`}
                 className="transition hover:text-brand-orange"

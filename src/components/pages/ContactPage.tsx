@@ -1,10 +1,10 @@
-import { FaWhatsapp, FaInstagram } from "react-icons/fa6";
+import { FaWhatsapp, FaInstagram, FaEnvelope } from "react-icons/fa6";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { IconPhone, IconMap, IconCheck } from "@/components/ui/icons";
 import { ContactForm } from "@/components/pages/ContactForm";
-import { company, whatsappLink } from "@/data/site";
+import { company, emailLink } from "@/data/site";
 
 const includePoints = [
   "Identificação do órgão público, cidade e estado.",
@@ -13,22 +13,31 @@ const includePoints = [
   "Dados de contato do gestor responsável.",
 ] as const;
 
-const channels = [
+type Channel = {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  href?: string;
+  external?: boolean;
+};
+
+const channels: Channel[] = [
+  {
+    icon: <FaEnvelope size={19} />,
+    label: "E-mail",
+    value: company.email,
+    href: emailLink("Contato institucional — saúde pública animal"),
+  },
   {
     icon: <FaWhatsapp size={20} />,
     label: "WhatsApp",
     value: company.whatsappDisplay,
-    href: whatsappLink(
-      "Olá, Grupo CVRBG! Gostaria de falar sobre uma operação de saúde pública animal.",
-    ),
-    external: true,
   },
   {
     icon: <IconPhone size={19} />,
     label: "Telefone",
     value: company.phoneDisplay,
     href: `tel:${company.phoneHref}`,
-    external: false,
   },
   {
     icon: <FaInstagram size={20} />,
@@ -37,7 +46,40 @@ const channels = [
     href: company.instagramUrl,
     external: true,
   },
-] as const;
+];
+
+const channelClass =
+  "group flex items-center gap-4 rounded-[var(--radius-lg)] border border-brand-brown/10 bg-white p-5";
+const channelLinkClass = `${channelClass} transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-orange/30 hover:shadow-[var(--shadow-md)]`;
+
+function ChannelBody({ channel }: { channel: Channel }) {
+  const interactive = Boolean(channel.href);
+  return (
+    <>
+      <span
+        className={`grid size-11 shrink-0 place-items-center rounded-[var(--radius-md)] bg-brand-orange/12 text-brand-orange ${
+          interactive
+            ? "transition-colors duration-300 group-hover:bg-brand-orange group-hover:text-white"
+            : ""
+        }`}
+      >
+        {channel.icon}
+      </span>
+      <span>
+        <span className="block font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-muted">
+          {channel.label}
+        </span>
+        <span
+          className={`block font-display text-base font-semibold text-brand-brown ${
+            interactive ? "transition-colors group-hover:text-brand-orange" : ""
+          }`}
+        >
+          {channel.value}
+        </span>
+      </span>
+    </>
+  );
+}
 
 export function ContactPage() {
   return (
@@ -62,28 +104,24 @@ export function ContactPage() {
           <Reveal>
             <div className="flex flex-col gap-8">
               <div className="grid gap-3">
-                {channels.map((channel) => (
-                  <a
-                    key={channel.label}
-                    href={channel.href}
-                    {...(channel.external
-                      ? { target: "_blank", rel: "noreferrer" }
-                      : {})}
-                    className="group flex items-center gap-4 rounded-[var(--radius-lg)] border border-brand-brown/10 bg-white p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-orange/30 hover:shadow-[var(--shadow-md)]"
-                  >
-                    <span className="grid size-11 shrink-0 place-items-center rounded-[var(--radius-md)] bg-brand-orange/12 text-brand-orange transition-colors duration-300 group-hover:bg-brand-orange group-hover:text-white">
-                      {channel.icon}
-                    </span>
-                    <span>
-                      <span className="block font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-muted">
-                        {channel.label}
-                      </span>
-                      <span className="block font-display text-base font-semibold text-brand-brown transition-colors group-hover:text-brand-orange">
-                        {channel.value}
-                      </span>
-                    </span>
-                  </a>
-                ))}
+                {channels.map((channel) =>
+                  channel.href ? (
+                    <a
+                      key={channel.label}
+                      href={channel.href}
+                      {...(channel.external
+                        ? { target: "_blank", rel: "noreferrer" }
+                        : {})}
+                      className={channelLinkClass}
+                    >
+                      <ChannelBody channel={channel} />
+                    </a>
+                  ) : (
+                    <div key={channel.label} className={channelClass}>
+                      <ChannelBody channel={channel} />
+                    </div>
+                  ),
+                )}
               </div>
 
               <div className="rounded-[var(--radius-lg)] bg-brand-brown p-6 text-white sm:p-7">
