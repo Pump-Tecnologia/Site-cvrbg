@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FaApple, FaGooglePlay } from "react-icons/fa6";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
@@ -9,48 +10,53 @@ import { PawField } from "@/components/ui/PawField";
 import {
   IconCalendar,
   IconDoc,
-  IconHeart,
   IconMessage,
+  IconShield,
 } from "@/components/ui/icons";
 import type { LucideIcon } from "lucide-react";
 
 const appFlow = [
   {
-    title: "Cadastre você e seu pet",
-    text: "Coloque os dados do seu animal e o seu contato uma única vez. Rápido e sem papelada.",
+    title: "Crie sua conta e cadastre seus pets",
+    text: "Entre com e-mail, Google ou Apple e informe os dados do seu cão ou gato uma única vez: nome, espécie, idade, peso e porte.",
   },
   {
-    title: "Agende o atendimento",
-    text: "Confirme data, local e tipo de serviço. Você sabe exatamente quando e onde comparecer.",
+    title: "Inscreva-se no evento da sua cidade",
+    text: "Escolha o mutirão de castração gratuita disponível na sua região. O app confere as regras do programa (idade, peso, cota por CPF, residência) na hora.",
   },
   {
-    title: "Siga as orientações",
-    text: "Veja os cuidados antes e depois do atendimento, explicados de um jeito simples e direto.",
+    title: "Compareça e acompanhe tudo pelo app",
+    text: "Receba a senha do dia, o resultado da triagem, o status do atendimento e o horário de alta — com o número do microchip registrado no cadastro do pet.",
   },
 ] as const;
 
-const appFeatures = ["Castração", "Retorno", "Documentos", "Comunicados"] as const;
+const appFeatures = [
+  "Inscrição",
+  "Senha do dia",
+  "Triagem",
+  "Microchip",
+] as const;
 
 const benefits: { icon: LucideIcon; title: string; text: string }[] = [
   {
-    icon: IconCalendar,
-    title: "Agenda e lembretes",
-    text: "Você é avisado de cada data e não perde o atendimento do seu pet.",
+    icon: IconMessage,
+    title: "Avisos em cada etapa",
+    text: "Notificações no app e por e-mail sobre inscrição, triagem, resultado e lembretes do evento.",
   },
   {
     icon: IconDoc,
-    title: "Histórico e documentos",
-    text: "Tudo o que foi feito com o seu pet fica guardado num só lugar.",
+    title: "Documentos oficiais",
+    text: "Termo de Autorização, Ficha de Controle do CRMV e número do microchip ficam vinculados ao seu pet.",
   },
   {
-    icon: IconHeart,
-    title: "Cuidados explicados",
-    text: "Orientações de pré e pós-atendimento em linguagem simples.",
+    icon: IconCalendar,
+    title: "Eventos da sua região",
+    text: "Veja os mutirões de castração gratuita disponíveis onde você mora e as regras de cada programa.",
   },
   {
-    icon: IconMessage,
-    title: "Avisos da sua cidade",
-    text: "Comunicados sobre mutirões e serviços disponíveis na sua região.",
+    icon: IconShield,
+    title: "Seus dados, sob seu controle",
+    text: "Sem anúncios nem rastreamento. Você vê, baixa ou exclui seus dados quando quiser, direto no perfil.",
   },
 ];
 
@@ -87,15 +93,16 @@ export function TutorAppPage() {
           <div className="grid gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
             <Reveal>
               <div className="max-w-xl">
-                <Eyebrow>App para tutores</Eyebrow>
+                <Eyebrow>ConectaPet · app para tutores</Eyebrow>
                 <h1 className="mt-5 font-display text-[clamp(2.2rem,1.4rem+3.4vw,3.9rem)] font-semibold leading-[1.05] tracking-[-0.015em] text-brand-brown">
-                  O cuidado do seu pet na palma da mão
+                  Castração gratuita do seu pet, com inscrição pelo celular
                   <span className="text-brand-orange">.</span>
                 </h1>
                 <p className="mt-6 font-sans text-lg font-light leading-8 text-brand-muted">
-                  Acompanhe o cadastro, o agendamento e cada etapa do atendimento
-                  do seu pet — com orientações simples e lembretes, direto no
-                  celular.
+                  O ConectaPet é o aplicativo do Grupo CVRBG para tutores de
+                  cães e gatos se inscreverem nos eventos de castração gratuita
+                  promovidos por estados e prefeituras — e acompanharem cada
+                  etapa, da inscrição à alta.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                   <Button href="#baixar" variant="primary" size="lg" withArrow>
@@ -121,14 +128,15 @@ export function TutorAppPage() {
                   <div className="overflow-hidden rounded-[30px] bg-white">
                     <div className="bg-brand-brown px-5 pb-9 pt-9 text-white">
                       <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-orange">
-                        Próximo atendimento
+                        Próximo evento
                       </p>
                       <h2 className="mt-3 font-display text-2xl font-semibold leading-tight">
-                        Castração agendada
+                        Inscrição confirmada
                         <span className="text-brand-orange">.</span>
                       </h2>
                       <p className="mt-3 font-sans text-sm font-light leading-6 text-white/72">
-                        Confira local, horário e orientações antes do procedimento.
+                        Mutirão de castração gratuita — confira local, data e
+                        sua senha do dia.
                       </p>
                     </div>
 
@@ -141,7 +149,7 @@ export function TutorAppPage() {
                           Luna
                         </p>
                         <p className="mt-1 font-sans text-sm font-light text-brand-muted">
-                          Procedimento confirmado
+                          Senha 42 · Triagem: apta
                         </p>
                       </div>
 
@@ -160,10 +168,11 @@ export function TutorAppPage() {
 
                       <div className="rounded-[var(--radius-md)] bg-brand-orange p-4 text-white">
                         <p className="font-sans text-sm font-semibold">
-                          Orientações liberadas
+                          Termo assinado na recepção
                         </p>
                         <p className="mt-1 font-sans text-xs font-light leading-5 text-white/82">
-                          Preparos antes do atendimento e cuidados após a alta.
+                          Termo de Autorização e Ficha do CRMV vinculados à
+                          Luna.
                         </p>
                       </div>
                     </div>
@@ -181,8 +190,8 @@ export function TutorAppPage() {
           <Reveal>
             <SectionHeading
               eyebrow="Como funciona"
-              title="Do cadastro ao atendimento, sem complicação"
-              description="Três passos simples para você chegar tranquilo e preparado no dia do atendimento do seu pet."
+              title="Da inscrição à alta, tudo pelo ConectaPet"
+              description="Três passos para garantir a vaga do seu pet no mutirão de castração gratuita e chegar preparado no dia."
             />
           </Reveal>
 
@@ -216,8 +225,8 @@ export function TutorAppPage() {
             <SectionHeading
               align="center"
               eyebrow="Feito para você e seu pet"
-              title="Tudo do seu pet, organizado num só lugar"
-              description="Lembretes, orientações e o histórico de cada atendimento — simples e na hora que você precisar, para cuidar do seu melhor amigo com tranquilidade."
+              title="Tudo do seu pet e do atendimento num só lugar"
+              description="Inscrições, status, documentos e avisos — organizados no app, sem papelada e sem fila para saber em que etapa o seu pet está."
             />
           </Reveal>
         </Container>
@@ -227,7 +236,7 @@ export function TutorAppPage() {
           <div className="relative mx-auto mt-10 w-full max-w-[1500px] px-5 sm:mt-12 sm:px-6 lg:px-8">
             <Image
               src="/images/feedback-img.png"
-              alt="Pets acompanhados pelo Grupo CVRBG"
+              alt="Cães e gatos atendidos nos eventos de castração do Grupo CVRBG"
               width={3907}
               height={1241}
               sizes="(min-width: 1500px) 1500px, 100vw"
@@ -259,6 +268,16 @@ export function TutorAppPage() {
               );
             })}
           </div>
+          <p className="mt-8 text-center font-sans text-sm font-light text-brand-muted">
+            Quer saber exatamente quais dados o app usa e por quê?{" "}
+            <Link
+              href="/privacidade"
+              className="font-medium text-brand-orange underline-offset-4 hover:underline"
+            >
+              Leia a política de privacidade do ConectaPet
+            </Link>
+            .
+          </p>
         </Container>
       </section>
 
@@ -274,13 +293,13 @@ export function TutorAppPage() {
               <div>
                 <Eyebrow tone="dark">Em breve nas lojas</Eyebrow>
                 <h2 className="mt-5 max-w-xl font-display text-[clamp(1.8rem,1.2rem+2.2vw,2.8rem)] font-semibold leading-[1.1] tracking-[-0.01em] text-white">
-                  Baixe o app assim que chegar na sua cidade
+                  Baixe o ConectaPet assim que chegar na sua cidade
                   <span className="text-brand-orange">.</span>
                 </h2>
                 <p className="mt-5 max-w-lg font-sans text-base font-light leading-7 text-white/72">
                   Os links da App Store e da Google Play serão ativados no
-                  lançamento, conforme o serviço chega a cada município. Fique de
-                  olho!
+                  lançamento, conforme os eventos de castração gratuita chegam a
+                  cada município. Fique de olho!
                 </p>
               </div>
 
@@ -289,8 +308,16 @@ export function TutorAppPage() {
                   Disponível em breve
                 </p>
                 <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                  <StoreBadge glyph={<FaApple size={24} />} eyebrow="Baixar na" label="App Store" />
-                  <StoreBadge glyph={<FaGooglePlay size={20} />} eyebrow="Disponível no" label="Google Play" />
+                  <StoreBadge
+                    glyph={<FaApple size={24} />}
+                    eyebrow="Baixar na"
+                    label="App Store"
+                  />
+                  <StoreBadge
+                    glyph={<FaGooglePlay size={20} />}
+                    eyebrow="Disponível no"
+                    label="Google Play"
+                  />
                 </div>
               </div>
             </div>
