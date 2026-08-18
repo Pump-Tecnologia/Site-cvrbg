@@ -7,12 +7,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
 import { PawField } from "@/components/ui/PawField";
-import {
-  IconCalendar,
-  IconDoc,
-  IconMessage,
-  IconShield,
-} from "@/components/ui/icons";
+import { IconCalendar, IconMessage, IconShield } from "@/components/ui/icons";
 import type { LucideIcon } from "lucide-react";
 
 const appFlow = [
@@ -44,11 +39,6 @@ const benefits: { icon: LucideIcon; title: string; text: string }[] = [
     text: "Notificações no app e por e-mail sobre inscrição, triagem, resultado e lembretes do evento.",
   },
   {
-    icon: IconDoc,
-    title: "Documentos oficiais",
-    text: "Termo de Autorização, Ficha de Controle do CRMV e número do microchip ficam vinculados ao seu pet.",
-  },
-  {
     icon: IconCalendar,
     title: "Eventos da sua região",
     text: "Veja os mutirões de castração gratuita disponíveis onde você mora e as regras de cada programa.",
@@ -70,7 +60,7 @@ function StoreBadge({
   label: string;
 }) {
   return (
-    <span className="inline-flex min-w-[200px] items-center gap-3.5 rounded-[var(--radius-md)] border border-white/20 bg-brand-brown/30 px-5 py-3.5 text-white">
+    <span className="inline-flex min-w-[200px] items-center gap-3.5 rounded-[var(--radius-md)] border border-white/20 bg-brand-brown px-5 py-3.5 text-white">
       <span className="text-white">{glyph}</span>
       <span className="flex flex-col">
         <span className="font-sans text-[10px] font-medium uppercase leading-none tracking-[0.16em] text-white/65">
@@ -246,7 +236,7 @@ export function TutorAppPage() {
         </Reveal>
 
         <Container className="relative">
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {benefits.map((benefit, index) => {
               const Icon = benefit.icon;
               return (
@@ -284,27 +274,28 @@ export function TutorAppPage() {
       {/* Download */}
       <section
         id="baixar"
-        className="relative overflow-hidden bg-grain bg-brand-brown py-20 text-white sm:py-24"
+        className="bg-grain relative overflow-hidden bg-brand-orange py-20 text-white sm:py-24"
       >
-        <PawField />
+        <PawField className="text-white/[0.13]" />
+        <div className="pointer-events-none absolute -right-16 -top-16 h-72 w-72 rounded-full bg-white/10 blur-2xl" />
         <Container className="relative">
           <Reveal>
             <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
               <div>
-                <Eyebrow tone="dark">Em breve nas lojas</Eyebrow>
+                <Eyebrow tone="onOrange">Em breve nas lojas</Eyebrow>
                 <h2 className="mt-5 max-w-xl font-display text-[clamp(1.8rem,1.2rem+2.2vw,2.8rem)] font-semibold leading-[1.1] tracking-[-0.01em] text-white">
                   Baixe o ConectaPet assim que chegar na sua cidade
-                  <span className="text-brand-orange">.</span>
+                  <span className="text-brand-brown">.</span>
                 </h2>
-                <p className="mt-5 max-w-lg font-sans text-base font-light leading-7 text-white/72">
+                <p className="mt-5 max-w-lg font-sans text-base font-light leading-7 text-white/85">
                   Os links da App Store e da Google Play serão ativados no
                   lançamento, conforme os eventos de castração gratuita chegam a
                   cada município. Fique de olho!
                 </p>
               </div>
 
-              <div className="rounded-[var(--radius-lg)] border border-white/12 bg-white/[0.04] p-6 sm:p-8">
-                <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-orange">
+              <div className="rounded-[var(--radius-lg)] border border-white/25 bg-white/10 p-6 sm:p-8">
+                <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-brown">
                   Disponível em breve
                 </p>
                 <div className="mt-5 flex flex-col gap-3 sm:flex-row">
