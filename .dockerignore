@@ -1,0 +1,8 @@
+node_modules
+.next
+.git
+.claude
+.vercel
+*.log
+.DS_Store
+tsconfig.tsbuildinfo

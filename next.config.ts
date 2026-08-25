@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Servidor auto-contido para rodar em container no droplet (sem node_modules).
+  output: "standalone",
   outputFileTracingRoot: process.cwd(),
   async redirects() {
     return [

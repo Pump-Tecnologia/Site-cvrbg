@@ -1,0 +1,51 @@
+# ---------------------------------------------------------------------------
+# Site institucional CVRBG — stack de producao no droplet (cvrbg-server).
+#
+#   docker compose -f deploy/docker-compose.yml --env-file /opt/cvrbg-site/.env up -d
+#
+# O Nginx NAO esta aqui: roda no host, com o certificado de origem da
+# Cloudflare (o mesmo que serve app./api.). Este compose so publica o site em
+# 127.0.0.1:3001, que e o upstream que o vhost www.cvrbg.com.br espera.
+#
+# O .env e proprio do site, separado do /opt/cvrbg/.env da API de proposito: o
+# site so precisa da chave do Resend, e nao deve ter alcance nenhum sobre a
+# senha do Postgres, o JWT_SECRET ou a chave privada da Apple.
+# ---------------------------------------------------------------------------
+name: cvrbg-site
+
+services:
+  site:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    image: cvrbg-site:local
+    container_name: cvrbg-site
+    restart: unless-stopped
+    environment:
+      # Formulario de contato (/api/contact). Sem RESEND_API_KEY a rota
+      # responde 503 e o formulario orienta a escrever direto para o comercial
+      # — falha visivel, nao silenciosa.
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      CONTACT_FROM_EMAIL: ${CONTACT_FROM_EMAIL:-Site CVRBG <nao-responda@cvrbg.com.br>}
+      NODE_ENV: production
+      TZ: America/Sao_Paulo
+    # Só o Nginx do host alcança o site. Sem porta publica.
+    ports:
+      - "127.0.0.1:3001:3000"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
