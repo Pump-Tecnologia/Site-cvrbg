@@ -3,7 +3,6 @@
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
 import { IconChevron } from "@/components/ui/icons";
-import { emailLink } from "@/data/site";
 
 const demandTypes = [
   "Castramóveis e mutirões",
@@ -36,9 +35,13 @@ const fieldClass =
 const labelClass =
   "mb-2 block font-sans text-xs font-semibold uppercase tracking-[0.14em] text-brand-brown";
 
+type SubmitStatus = "idle" | "sending" | "sent" | "error";
+
 export function ContactForm() {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [touched, setTouched] = useState(false);
+  const [status, setStatus] = useState<SubmitStatus>("idle");
+  const [honeypot, setHoneypot] = useState("");
 
   const requiredFilled =
     form.name.trim() !== "" &&
@@ -49,25 +52,33 @@ export function ContactForm() {
     setForm((current) => ({ ...current, [key]: value }));
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setTouched(true);
-    if (!requiredFilled) return;
+    if (!requiredFilled || status === "sending") return;
 
-    const message = [
-      `Olá, Grupo CVRBG! Sou ${form.name.trim()}.`,
-      `Órgão/cidade: ${form.org.trim()}`,
-      `Demanda: ${form.demand}`,
-      `Contato: ${form.contact.trim()}`,
-      form.message.trim() ? `Detalhes: ${form.message.trim()}` : null,
-    ]
-      .filter(Boolean)
-      .join("\n");
-
-    window.location.href = emailLink(
-      `Demanda: ${form.demand} — ${form.org.trim()}`,
-      message,
-    );
+    setStatus("sending");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          org: form.org.trim(),
+          contact: form.contact.trim(),
+          demand: form.demand,
+          message: form.message.trim(),
+          website: honeypot,
+        }),
+      });
+      const data = (await response.json()) as { success?: boolean };
+      if (!response.ok || !data.success) throw new Error("send failed");
+      setStatus("sent");
+      setForm(emptyForm);
+      setTouched(false);
+    } catch {
+      setStatus("error");
+    }
   }
 
   const showError = touched && !requiredFilled;
@@ -76,15 +87,32 @@ export function ContactForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="rounded-[var(--radius-xl)] border border-brand-brown/10 bg-brand-cream p-6 shadow-[var(--shadow-sm)] sm:p-8"
+      className="relative rounded-[var(--radius-xl)] border border-brand-brown/10 bg-brand-cream p-6 shadow-[var(--shadow-sm)] sm:p-8"
     >
       <p className="font-display text-xl font-semibold text-brand-brown">
         Envie sua demanda
       </p>
       <p className="mt-2 font-sans text-sm font-light leading-6 text-brand-muted">
-        Preencha os campos e envie por e-mail — sua mensagem já chega
-        organizada para a nossa equipe.
+        Preencha os campos e envie — sua mensagem chega direto no e-mail da
+        nossa equipe comercial.
       </p>
+
+      {/* Honeypot anti-spam: invisível para humanos, bots preenchem */}
+      <div
+        aria-hidden="true"
+        className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden"
+      >
+        <label htmlFor="website">Não preencha este campo</label>
+        <input
+          id="website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+        />
+      </div>
 
       <div className="mt-7 grid gap-5">
         <div>
@@ -187,13 +215,37 @@ export function ContactForm() {
           Preencha os campos obrigatórios para continuar.
         </p>
       ) : null}
+      {status === "error" ? (
+        <p
+          role="alert"
+          className="mt-4 font-sans text-sm font-medium text-brand-burgundy"
+        >
+          Não foi possível enviar agora. Tente novamente ou escreva para
+          comercial@cvrbg.com.br.
+        </p>
+      ) : null}
+      {status === "sent" ? (
+        <p
+          role="status"
+          className="mt-4 font-sans text-sm font-medium text-brand-brown"
+        >
+          Demanda enviada! Nossa equipe comercial retorna em breve.
+        </p>
+      ) : null}
 
       <div className="mt-6">
-        <Button type="submit" variant="primary" size="lg" withArrow fullWidth>
-          Enviar por e-mail
+        <Button
+          type="submit"
+          variant="primary"
+          size="lg"
+          withArrow
+          fullWidth
+          disabled={status === "sending"}
+        >
+          {status === "sending" ? "Enviando..." : "Enviar demanda"}
         </Button>
         <p className="mt-3 text-center font-sans text-xs font-light text-brand-muted">
-          Seu aplicativo de e-mail será aberto com a mensagem pronta.
+          Sua mensagem vai direto para comercial@cvrbg.com.br.
         </p>
       </div>
     </form>

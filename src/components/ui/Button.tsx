@@ -16,6 +16,8 @@ type ButtonProps = {
   fullWidth?: boolean;
   className?: string;
   type?: "button" | "submit";
+  /** Only applies when rendering a <button> (no href). */
+  disabled?: boolean;
   onClick?: () => void;
   "aria-label"?: string;
 };
@@ -62,6 +64,7 @@ export function Button({
   fullWidth = false,
   className = "",
   type = "button",
+  disabled = false,
   onClick,
   "aria-label": ariaLabel,
 }: ButtonProps) {
@@ -98,14 +101,25 @@ export function Button({
       );
     }
     return (
-      <Link href={href} className={classes} aria-label={ariaLabel} onClick={onClick}>
+      <Link
+        href={href}
+        className={classes}
+        aria-label={ariaLabel}
+        onClick={onClick}
+      >
         {content}
       </Link>
     );
   }
 
   return (
-    <button type={type} className={classes} onClick={onClick} aria-label={ariaLabel}>
+    <button
+      type={type}
+      className={`${classes} disabled:cursor-not-allowed disabled:opacity-60`}
+      onClick={onClick}
+      aria-label={ariaLabel}
+      disabled={disabled}
+    >
       {content}
     </button>
   );
