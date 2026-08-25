@@ -138,5 +138,11 @@ export async function POST(request: Request) {
     );
   }
 
+  // O id fica no log de propósito: a chave é restrita a envio, então não dá
+  // para listar mensagens pela API. Quando alguém disser que uma demanda não
+  // chegou, é por este id que se acha a mensagem no painel do Resend.
+  const { id } = (await response.json()) as { id?: string };
+  console.info(`[contact] enviado para ${company.email} — resend id ${id}`);
+
   return NextResponse.json({ success: true });
 }
