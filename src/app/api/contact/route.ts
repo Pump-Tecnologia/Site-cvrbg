@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { company } from "@/data/site";
+import { emailDeContato } from "@/lib/email/contato";
 
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 const MAX_FIELD_LENGTH = 200;
@@ -42,14 +43,6 @@ function parsePayload(body: unknown): ContactPayload {
     message: sanitize(raw.message, MAX_MESSAGE_LENGTH),
     website: sanitize(raw.website, MAX_FIELD_LENGTH),
   };
-}
-
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
 }
 
 export async function POST(request: Request) {
@@ -98,20 +91,14 @@ export async function POST(request: Request) {
     process.env.CONTACT_FROM_EMAIL ?? "Site CVRBG <site@cvrbg.com.br>";
   const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.contact);
 
-  const lines = [
-    ["Responsável", payload.name],
-    ["Órgão/cidade", payload.org],
-    ["Contato", payload.contact],
-    ["Demanda", payload.demand],
-    ["Detalhes", payload.message || "—"],
-  ] as const;
-
-  const html = `<h2>Nova demanda pelo site</h2><table cellpadding="6">${lines
-    .map(
-      ([label, value]) =>
-        `<tr><td><strong>${label}</strong></td><td>${escapeHtml(value).replace(/\n/g, "<br />")}</td></tr>`,
-    )
-    .join("")}</table>`;
+  const mensagem = emailDeContato({
+    nome: payload.name,
+    orgao: payload.org,
+    contato: payload.contact,
+    demanda: payload.demand,
+    detalhes: payload.message,
+    contatoEhEmail: isEmail,
+  });
 
   const response = await fetch(RESEND_ENDPOINT, {
     method: "POST",
@@ -122,9 +109,9 @@ export async function POST(request: Request) {
     body: JSON.stringify({
       from,
       to: [company.email],
-      subject: `[Site] ${payload.demand} — ${payload.org}`,
-      html,
-      text: lines.map(([label, value]) => `${label}: ${value}`).join("\n"),
+      subject: mensagem.assunto,
+      html: mensagem.html,
+      text: mensagem.texto,
       ...(isEmail ? { reply_to: payload.contact } : {}),
     }),
   });
