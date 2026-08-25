@@ -17,7 +17,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://grupocvrbg.com.br"),
+  metadataBase: new URL("https://www.cvrbg.com.br"),
   title: {
     default: "Grupo CVRBG | Saúde animal para gestão pública",
     template: "%s | Grupo CVRBG",
@@ -43,10 +43,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="pt-BR"
-      className={`${figtree.variable} ${montserrat.variable}`}
-    >
+    <html lang="pt-BR" className={`${figtree.variable} ${montserrat.variable}`}>
       <body>{children}</body>
     </html>
   );
