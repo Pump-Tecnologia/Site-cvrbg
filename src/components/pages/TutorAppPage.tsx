@@ -114,6 +114,10 @@ export function TutorAppPage() {
                   width={1122}
                   height={1402}
                   priority
+                  // Captura de interface, nao fotografia: o padrao q=75 do Next
+                  // serrilha o texto miudo da tela do app. 95 mantem a leitura
+                  // limpa e ainda entrega ~100 KB contra 980 KB do PNG original.
+                  quality={95}
                   sizes="(min-width: 1024px) 380px, (min-width: 640px) 340px, 280px"
                   className="relative h-auto w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[380px]"
                 />
