@@ -102,7 +102,7 @@ export function TutorAppPage() {
             <Reveal delay={0.1}>
               <div className="relative flex justify-center lg:justify-end">
                 {/* backdrop */}
-                <div className="absolute right-4 top-6 hidden h-[80%] w-[62%] rounded-[var(--radius-xl)] bg-brand-orange/90 lg:block" />
+                <div className="absolute right-4 top-6 hidden h-[80%] w-[80%] rounded-[var(--radius-xl)] bg-brand-orange/90 lg:block" />
                 <div className="absolute -left-6 bottom-0 h-56 w-56 rounded-full bg-brand-orange/15 blur-3xl" />
 
                 {/* Mockup real do app — a moldura do aparelho ja vem na
@@ -118,8 +118,8 @@ export function TutorAppPage() {
                   // serrilha o texto miudo da tela do app. 95 mantem a leitura
                   // limpa e ainda entrega ~100 KB contra 980 KB do PNG original.
                   quality={95}
-                  sizes="(min-width: 1024px) 380px, (min-width: 640px) 340px, 280px"
-                  className="relative h-auto w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[380px]"
+                  sizes="(min-width: 1024px) 500px, (min-width: 640px) 400px, 320px"
+                  className="relative h-auto w-full max-w-[320px] sm:max-w-[400px] lg:max-w-[500px]"
                 />
               </div>
             </Reveal>
