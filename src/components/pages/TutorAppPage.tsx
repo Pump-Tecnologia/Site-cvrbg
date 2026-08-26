@@ -25,13 +25,6 @@ const appFlow = [
   },
 ] as const;
 
-const appFeatures = [
-  "Inscrição",
-  "Senha do dia",
-  "Triagem",
-  "Microchip",
-] as const;
-
 const benefits: { icon: LucideIcon; title: string; text: string }[] = [
   {
     icon: IconMessage,
@@ -112,62 +105,18 @@ export function TutorAppPage() {
                 <div className="absolute right-4 top-6 hidden h-[80%] w-[62%] rounded-[var(--radius-xl)] bg-brand-orange/90 lg:block" />
                 <div className="absolute -left-6 bottom-0 h-56 w-56 rounded-full bg-brand-orange/15 blur-3xl" />
 
-                {/* device */}
-                <div className="relative w-full max-w-[320px] rounded-[40px] bg-brand-brown p-3 shadow-[var(--shadow-lg)]">
-                  <div className="absolute left-1/2 top-4 h-1.5 w-16 -translate-x-1/2 rounded-full bg-white/25" />
-                  <div className="overflow-hidden rounded-[30px] bg-white">
-                    <div className="bg-brand-brown px-5 pb-9 pt-9 text-white">
-                      <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-orange">
-                        Próximo evento
-                      </p>
-                      <h2 className="mt-3 font-display text-2xl font-semibold leading-tight">
-                        Inscrição confirmada
-                        <span className="text-brand-orange">.</span>
-                      </h2>
-                      <p className="mt-3 font-sans text-sm font-light leading-6 text-white/72">
-                        Mutirão de castração gratuita — confira local, data e
-                        sua senha do dia.
-                      </p>
-                    </div>
-
-                    <div className="space-y-4 p-5">
-                      <div className="rounded-[var(--radius-md)] bg-brand-cream p-4">
-                        <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-orange">
-                          Pet
-                        </p>
-                        <p className="mt-2 font-display text-lg font-semibold text-brand-brown">
-                          Luna
-                        </p>
-                        <p className="mt-1 font-sans text-sm font-light text-brand-muted">
-                          Senha 42 · Triagem: apta
-                        </p>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-3">
-                        {appFeatures.map((item) => (
-                          <div
-                            key={item}
-                            className="rounded-[var(--radius-sm)] border border-brand-brown/10 p-3"
-                          >
-                            <p className="font-sans text-xs font-medium text-brand-brown">
-                              {item}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="rounded-[var(--radius-md)] bg-brand-orange p-4 text-white">
-                        <p className="font-sans text-sm font-semibold">
-                          Termo assinado na recepção
-                        </p>
-                        <p className="mt-1 font-sans text-xs font-light leading-5 text-white/82">
-                          Termo de Autorização e Ficha do CRMV vinculados à
-                          Luna.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {/* Mockup real do app — a moldura do aparelho ja vem na
+                    imagem (PNG com fundo transparente), por isso nao ha
+                    device desenhado em volta. */}
+                <Image
+                  src="/images/mock-conectapet.png"
+                  alt="Tela inicial do ConectaPet: inscricao do pet em um mutirao de castracao, com a lista de pets do tutor"
+                  width={1122}
+                  height={1402}
+                  priority
+                  sizes="(min-width: 1024px) 380px, (min-width: 640px) 340px, 280px"
+                  className="relative h-auto w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[380px]"
+                />
               </div>
             </Reveal>
           </div>
