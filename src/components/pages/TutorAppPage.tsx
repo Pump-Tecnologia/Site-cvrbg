@@ -10,6 +10,8 @@ import { PawField } from "@/components/ui/PawField";
 import { IconCalendar, IconMessage, IconShield } from "@/components/ui/icons";
 import type { LucideIcon } from "lucide-react";
 
+const APP_STORE_URL = "https://apps.apple.com/br/app/conectapet/id6802042508";
+
 const appFlow = [
   {
     title: "Crie sua conta e cadastre seus pets",
@@ -43,17 +45,27 @@ const benefits: { icon: LucideIcon; title: string; text: string }[] = [
   },
 ];
 
+/**
+ * Selo de loja. Com `href` vira link de verdade; sem href fica apagado e o
+ * proprio rotulo diz que ainda nao saiu — melhor do que um botao que nao leva
+ * a lugar nenhum.
+ */
 function StoreBadge({
   glyph,
   eyebrow,
   label,
+  href,
 }: {
   glyph: React.ReactNode;
   eyebrow: string;
   label: string;
+  href?: string;
 }) {
-  return (
-    <span className="inline-flex min-w-[200px] items-center gap-3.5 rounded-[var(--radius-md)] border border-white/20 bg-brand-brown px-5 py-3.5 text-white">
+  const base =
+    "inline-flex min-w-[200px] items-center gap-3.5 rounded-[var(--radius-md)] border px-5 py-3.5 text-white";
+
+  const conteudo = (
+    <>
       <span className="text-white">{glyph}</span>
       <span className="flex flex-col">
         <span className="font-sans text-[10px] font-medium uppercase leading-none tracking-[0.16em] text-white/65">
@@ -63,7 +75,26 @@ function StoreBadge({
           {label}
         </span>
       </span>
-    </span>
+    </>
+  );
+
+  if (!href) {
+    return (
+      <span className={`${base} border-white/15 bg-brand-brown/60 opacity-70`}>
+        {conteudo}
+      </span>
+    );
+  }
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className={`${base} border-white/20 bg-brand-brown transition-all duration-300 hover:-translate-y-0.5 hover:border-white/40 hover:shadow-[var(--shadow-md)]`}
+    >
+      {conteudo}
+    </a>
   );
 }
 
@@ -88,12 +119,18 @@ export function TutorAppPage() {
                   etapa, da inscrição à alta.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                  <Button href="#baixar" variant="primary" size="lg" withArrow>
-                    Onde baixar
+                  <Button
+                    href={APP_STORE_URL}
+                    external
+                    variant="primary"
+                    size="lg"
+                    withArrow
+                  >
+                    Baixar na App Store
                   </Button>
                   <span className="inline-flex items-center gap-2 rounded-[var(--radius-pill)] border border-brand-brown/15 px-5 py-2.5 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-muted">
                     <span className="size-1.5 rounded-full bg-brand-orange" />
-                    Em breve nas lojas
+                    Disponível para iPhone e iPad
                   </span>
                 </div>
               </div>
@@ -235,31 +272,33 @@ export function TutorAppPage() {
           <Reveal>
             <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
               <div>
-                <Eyebrow tone="onOrange">Em breve nas lojas</Eyebrow>
+                <Eyebrow tone="onOrange">Disponível na App Store</Eyebrow>
                 <h2 className="mt-5 max-w-xl font-display text-[clamp(1.8rem,1.2rem+2.2vw,2.8rem)] font-semibold leading-[1.1] tracking-[-0.01em] text-white">
-                  Baixe o ConectaPet assim que chegar na sua cidade
+                  Baixe o ConectaPet e inscreva o seu pet
                   <span className="text-brand-brown">.</span>
                 </h2>
                 <p className="mt-5 max-w-lg font-sans text-base font-light leading-7 text-white/85">
-                  Os links da App Store e da Google Play serão ativados no
-                  lançamento, conforme os eventos de castração gratuita chegam a
-                  cada município. Fique de olho!
+                  Já disponível para iPhone e iPad, com iOS 15.1 ou superior. A
+                  versão para Android está a caminho. As vagas seguem a agenda
+                  de cada município, então vale acompanhar os eventos abertos na
+                  sua região.
                 </p>
               </div>
 
               <div className="rounded-[var(--radius-lg)] border border-white/25 bg-white/10 p-6 sm:p-8">
                 <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-brown">
-                  Disponível em breve
+                  Onde baixar
                 </p>
                 <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                   <StoreBadge
                     glyph={<FaApple size={24} />}
                     eyebrow="Baixar na"
                     label="App Store"
+                    href={APP_STORE_URL}
                   />
                   <StoreBadge
                     glyph={<FaGooglePlay size={20} />}
-                    eyebrow="Disponível no"
+                    eyebrow="Em breve no"
                     label="Google Play"
                   />
                 </div>
