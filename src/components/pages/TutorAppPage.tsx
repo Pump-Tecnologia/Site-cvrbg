@@ -118,20 +118,10 @@ export function TutorAppPage() {
                   promovidos por estados e prefeituras — e acompanharem cada
                   etapa, da inscrição à alta.
                 </p>
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                  <Button
-                    href={APP_STORE_URL}
-                    external
-                    variant="primary"
-                    size="lg"
-                    withArrow
-                  >
-                    Baixar na App Store
+                <div className="mt-8">
+                  <Button href="#baixar" variant="primary" size="lg" withArrow>
+                    Onde baixar
                   </Button>
-                  <span className="inline-flex items-center gap-2 rounded-[var(--radius-pill)] border border-brand-brown/15 px-5 py-2.5 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-muted">
-                    <span className="size-1.5 rounded-full bg-brand-orange" />
-                    Disponível para iPhone e iPad
-                  </span>
                 </div>
               </div>
             </Reveal>
