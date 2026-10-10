@@ -11,6 +11,7 @@ import { IconCalendar, IconMessage, IconShield } from "@/components/ui/icons";
 import type { LucideIcon } from "lucide-react";
 
 const APP_STORE_URL = "https://apps.apple.com/br/app/conectapet/id6802042508";
+const GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=com.cvrbg.tutor";
 
 const appFlow = [
   {
@@ -262,16 +263,15 @@ export function TutorAppPage() {
           <Reveal>
             <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
               <div>
-                <Eyebrow tone="onOrange">Disponível na App Store</Eyebrow>
+                <Eyebrow tone="onOrange">Disponível para iPhone e Android</Eyebrow>
                 <h2 className="mt-5 max-w-xl font-display text-[clamp(1.8rem,1.2rem+2.2vw,2.8rem)] font-semibold leading-[1.1] tracking-[-0.01em] text-white">
                   Baixe o ConectaPet e inscreva o seu pet
                   <span className="text-brand-brown">.</span>
                 </h2>
                 <p className="mt-5 max-w-lg font-sans text-base font-light leading-7 text-white/85">
-                  Já disponível para iPhone e iPad, com iOS 15.1 ou superior. A
-                  versão para Android está a caminho. As vagas seguem a agenda
-                  de cada município, então vale acompanhar os eventos abertos na
-                  sua região.
+                  Disponível na App Store e no Google Play. As vagas seguem a
+                  agenda de cada município, então vale acompanhar os eventos
+                  abertos na sua região.
                 </p>
               </div>
 
@@ -288,8 +288,9 @@ export function TutorAppPage() {
                   />
                   <StoreBadge
                     glyph={<FaGooglePlay size={20} />}
-                    eyebrow="Em breve no"
+                    eyebrow="Disponível no"
                     label="Google Play"
+                    href={GOOGLE_PLAY_URL}
                   />
                 </div>
               </div>
